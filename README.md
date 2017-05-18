@@ -4,11 +4,11 @@ This is a node framework that enforces scalability, seperation of concern, and o
 
 ### Setup
 
-    `npm install`
+    npm install
 
 ### Run
 
-    `npm start`
+    npm start
 
 |`npm run <script>`    |Description|
 |-------------------|-----------|
@@ -21,3 +21,8 @@ This is a node framework that enforces scalability, seperation of concern, and o
 ### Documentation
 
 (Coming Soon)
+
+## todo
+- [ ] Move /views to /app/views
+- [ ] Use plop for generating files
+- [ ] Enhance User functionalities (reset/change password, upload avatar)
