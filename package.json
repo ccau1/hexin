@@ -8,7 +8,8 @@
     "lint": "eslint app --ext .js || true",
     "apidoc": "apidoc -i app/controllers/ -o public/docs/",
     "test": "mocha \"__test__/**/*.js\"",
-    "build": "npm run apidoc"
+    "build": "npm run apidoc",
+    "plop": "plop"
   },
   "repository": {
     "type": "git",
@@ -69,9 +70,12 @@
     "grunt": "^1.0.1",
     "grunt-eslint": "^19.0.0",
     "grunt-mocha-istanbul": "^5.0.2",
+    "inquirer-directory": "^2.1.0",
     "istanbul": "^0.4.5",
     "load-grunt-config": "^0.19.2",
-    "mocha": "^3.3.0"
+    "mocha": "^3.3.0",
+    "plop": "^1.7.4",
+    "pluralize": "^5.0.0"
   },
   "license": "MIT",
   "apidoc": {
