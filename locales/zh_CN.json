@@ -1,0 +1,15 @@
+{
+	"display_email_or_username": "电邮或用户名称",
+    "display_signUpName": "用户名称",
+    "err_find_no_result": "找不到任何{0}",
+	"err_email_invalid": "电子邮件无效",
+	"err_not_exist": "{0}不存在",
+  "err_invalid_gen_orderNo_input": "Invalid Generate Order No Input",
+    "err_member_info_exist": "{0}已经存在",
+    "err_member_password_invalid": "密码错误. 再试一次",
+	"err_member_password_not_match": "密码和确认密码不匹配",
+	"err_member_password_validation_6_10_digits": "密码需由6-10个字组成",
+	"err_reset_token_expired": "reset token is expired",
+	"msg_validation_required": "必须输入之项目。",
+  "param": "param"
+}

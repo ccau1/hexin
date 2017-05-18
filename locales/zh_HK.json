@@ -1,0 +1,15 @@
+{
+	"display_email_or_username": "電郵或用戶名稱",
+    "display_signUpName": "用戶名稱",
+    "err_find_no_result": "找不到任何{0}",
+	"err_email_invalid": "電子郵件無效",
+	"err_not_exist": "{0}不存在",
+  "err_invalid_gen_orderNo_input": "Invalid Generate Order No Input",
+    "err_member_info_exist": "{0}已經存在",
+    "err_member_password_invalid": "密碼錯誤. 再試一次",
+	"err_member_password_not_match": "密碼和確認密碼不匹配",
+	"err_member_password_validation_6_10_digits": "密碼需由6-10個字組成",
+	"err_reset_token_expired": "reset token is expired",
+	"msg_validation_required": "必須輸入之項目。",
+  "param": "param"
+}

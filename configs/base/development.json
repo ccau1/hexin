@@ -1,0 +1,34 @@
+{
+	"debug": true,
+	"aws": {
+		"iam": {
+			"s3": "s3-user-devcdn.tr",
+			"ses": "ses-user-tr"
+		}
+	},
+	"beanstalkd": {
+		"host": "beanstalkd",
+		"port": 11300
+	},
+	"redis" : {
+		"host": "rds",
+		"port": 6379,
+		"ttl": 6000
+	},
+	"payment": {
+		"braintree": {
+			"sandbox": true
+		}
+	},
+	"db": {
+		"mongo-wttwe-db": {
+			"engine": "mongo",
+			"connection": {
+				"hosts": ["localhost:27017"],
+				"database": "wttwe"
+			}
+    }
+	},
+  "secret": "1232412421412",
+  "host": "http://localhost"
+}

@@ -1,0 +1,17 @@
+{
+  "display_email_or_username": "Email",
+  "display_signUpName": "SignUp Name",
+  "err_db_throw": "DB Error: {0}",
+  "err_find_no_result": "Cannot find {0}",
+  "err_email_invalid": "Email is invalid.",
+  "err_id_not_match": "ID does not match",
+  "err_invalid_id": "Invalid ID",
+  "err_invalid_gen_orderNo_input": "Invalid Generate Order No Input",
+  "err_member_info_exist": "{0} already exist",
+  "err_member_password_invalid": "Wrong password. Try again",
+  "err_member_password_not_match": "password and confirm password do not match",
+  "err_member_password_validation_6_10_digits": "password must be within 6-10 characters",
+  "err_not_found": "{0} was not found",
+  "msg_validation_required": "This field is required for sign up.",
+  "param": "param"
+}

@@ -1,0 +1,15 @@
+{
+	"apps": [
+		{
+			"name": "wttwe-api",
+			"cwd" : "/home/deploy/wttwe/wttwe-api",
+			"script": "server.js",
+			"instances": 1,
+			"exec_mode": "fork",
+			"env": {
+				"NODE_ENV": "staging",
+				"PORT": "8281"
+			}
+		}
+	]
+}
