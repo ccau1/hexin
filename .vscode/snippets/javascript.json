@@ -1,0 +1,111 @@
+{
+  "Console Log": {
+    "prefix": "log",
+    "body": "console.log('$1');$0"
+  },
+
+  "Controller CRUD": {
+    "prefix": "ccontroller",
+    "body": [
+      "'use strict';",
+      "",
+      "const {ControllerCrudBase} = require('../../appFramework');",
+      "",
+      "// Service",
+      "const ${1:MyController}Service = require('../services/${1:MyController}Service');",
+      "",
+      "module.exports = class ${2:MyControllerPlural}Controller extends ControllerCrudBase {",
+      "  constructor(app) {",
+      "    const baseCrudMiddlewares = [",
+      "      (req, res, next) => {",
+      "        if (this.isVerb(req.method, 'POST|PUT|DELETE')) {",
+      "          this.authenticate(req, res, next);",
+      "        } else {",
+      "          next();",
+      "        }",
+      "      },",
+      "    ];",
+      "    super(app, '${2:MyControllerPlural}', ${1:MyController}Service, baseCrudMiddlewares);",
+      "  }",
+      "",
+      "  renderRoutes(router) {",
+      "    $0",
+      "  }",
+      "};",
+      ""
+    ]
+  },
+  "Controller": {
+    "prefix": "controller",
+    "body": [
+      "'use strict';",
+      "",
+      "// const co = require('co');",
+      "const {ControllerBase} = require('../../appFramework');",
+      "",
+      "// Service",
+      "const ${1:MyController}Service = new require('../services/${1:MyController}Service');",
+      "",
+      "module.exports = class ${2:MyControllerPlural}Controller extends ControllerBase {",
+      "  constructor(app) {",
+      "    super(app, '${2:MyControllerPlural}', ${1:MyController}Service);",
+      "  }",
+      "",
+      "  renderRoutes(router) {",
+      "    const {authorize} = this;",
+      "",
+      "    $0",
+      "  }",
+      "};",
+      ""
+    ]
+  },
+
+
+  "Service CRUD": {
+    "prefix": "cservice",
+    "body": [
+      "'use strict';",
+      "",
+      "const {ServiceCrudBase} = require('../../appFramework');",
+      "",
+      "// Models",
+      "const ${1:MyModel} = new require('../models/${1:MyModel}');",
+      "",
+      "module.exports = class ${1:MyModel}Service extends ServiceCrudBase {",
+      "  constructor(context_) {",
+      "    super(context_, ${1:MyModel});",
+      "  }",
+      "};",
+      ""
+    ]
+  },
+  "Service": {
+    "prefix": "service",
+    "body": [
+      "'use strict';",
+      "",
+      "const {ServiceCrudBase} = require('../../appFramework');",
+      "",
+      "// Models",
+      "const ${1:MyModel} = new require('../models/${1:MyModel}');",
+      "",
+      "module.exports = class ${1:MyModel}Service extends ServiceCrudBase {",
+      "  constructor(context_) {",
+      "    super(context_, ${1:MyModel});$0",
+      "  }",
+      "};",
+      ""
+    ]
+  },
+
+
+  "Require": {
+    "prefix": "rq",
+    "body": "const ${1:MyLibrary} = new require('$2${1:MyLibrary}');$0"
+  },
+  "Require AppFramework": {
+    "prefix": "rqaf",
+    "body": "const {${1:AFLibrary}} = new require('${2}AppFramework');$0"
+  }
+}
