@@ -23,7 +23,9 @@
         "**/.bashrc": true,
         "log": true,
         ".vscode": false,
-        "www": true
+        "www": true,
+        "plopfile.js": true,
+        "**/plopTemplates/**": true
     },
     "editor.tabCompletion": true,
     "editor.snippetSuggestions": "top",
