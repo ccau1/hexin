@@ -6,6 +6,7 @@ const pluralize = require('pluralize');
 const modelGenerator = require('./plopTemplates/model/generator');
 const controllerGenerator = require('./plopTemplates/controller/generator');
 const serviceGenerator = require('./plopTemplates/service/generator');
+const appStartGenerator = require('./plopTemplates/app_start/generator');
 
 module.exports = function (plop) {
   setHelpers(plop);
@@ -72,5 +73,11 @@ const setGenerators = function (plop) {
         ...controllerGenerator.actions(data),
       ];
     },
+  });
+
+  plop.setGenerator('App_Start', {
+    description: 'Application App_Start',
+    prompts: appStartGenerator.prompts,
+    actions: appStartGenerator.actions,
   });
 };

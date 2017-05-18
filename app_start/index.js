@@ -2,20 +2,20 @@
 
 const {AppStartBase} = require('hexin-core');
 
+const Auth = require('./authConfig');
 const BodyParser = require('./bodyParserConfig');
 const Controllers = require('./controllersConfig');
 const Db = require('./dbConfig');
 const Errors = require('./errorsConfig');
 const FiveBeans = require('./fiveBeansConfig');
+const HttpHeaders = require('./httpHeadersConfig');
 const Indicatives = require('./indicativesConfig');
 const Locale = require('./localeConfig');
 const Logger = require('./loggerConfig');
 const PublicPath = require('./publicPathConfig');
-const Auth = require('./authConfig');
 const RequirePath = require('./requirePathConfig');
 const Router = require('./routerConfig');
 const ServerStart = require('./serverStartConfig');
-const HttpHeaders = require('./httpHeadersConfig');
 const Views = require('./viewsConfig');
 
 module.exports = class AppStart extends AppStartBase {
@@ -30,11 +30,13 @@ module.exports = class AppStart extends AppStartBase {
   }
 
   setHandlers(appConfig) {
-    // handlers will be called in the order sorted here
+    // Note: handlers will be called in the order sorted here
+
+    // HANDLE BEGIN :: (Don't remove this line)
     this.handle(new RequirePath(appConfig));
     this.handle(new Db(appConfig));
     this.handle(new Router(appConfig));
-    this.handle(new HttpHeaders(appConfig)); // TODO:: TEMPORARY CORS, FIX IT
+    this.handle(new HttpHeaders(appConfig));
     this.handle(new Views(appConfig));
     this.handle(new PublicPath(appConfig));
     this.handle(new Logger(appConfig));
@@ -46,5 +48,6 @@ module.exports = class AppStart extends AppStartBase {
     this.handle(new Controllers(appConfig));
     this.handle(new Errors(appConfig));
     this.handle(new ServerStart(appConfig));
+    // HANDLE END :: (Don't remove this line)
   }
 };

@@ -4,8 +4,9 @@ const {AppStartConfig, Database} = require('hexin-core');
 
 module.exports = class ErrorsConfig extends AppStartConfig {
   preInit(appConfig) {
-    const dbName = 'mongo-wttwe-db';
-    const dbConfig = Object.assign({}, appConfig.db[dbName], {default: true});
-    Database.init(dbName, dbConfig);
+    // dbConfigName is the name given in /configs/base/{NODE_ENV}.json -> db
+    const dbConfigName = 'mongo-wttwe-db';
+    const dbConfig = Object.assign({}, appConfig.db[dbConfigName], {default: true});
+    Database.init(dbConfigName, dbConfig);
   }
 };

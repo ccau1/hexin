@@ -17,15 +17,15 @@
         "**/.editorconfig": true,
         "**/.babelrc": true,
         "**/Gruntfile.js": true,
-        "**/README.md": true,
+        "**/README.md": false,
         "webpack.config.js": true,
         "**/build/**": true,
         "**/.bashrc": true,
         "log": true,
         ".vscode": false,
         "www": true,
-        "plopfile.js": true,
-        "**/plopTemplates/**": true
+        "plopfile.js": false,
+        "**/plopTemplates/**": false
     },
     "editor.tabCompletion": true,
     "editor.snippetSuggestions": "top",

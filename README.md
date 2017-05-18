@@ -24,12 +24,29 @@ This is a node framework that enforces scalability, seperation of concern, and o
 
     $ npm install -g plop
 
-We use plop to generate scaffolds to maintain consistancy in code and folder structure, as well as speeding up development time.
+#### View File Scaffolding List
+
+    $ plop
+
+We use plop to generate scaffolds to maintain consistancy in code and folder structure, as well as speeding up development time. Here are the available plop generators:
+
+|`npm run g:<script>`    |Description|
+|-------------------|-----------|
+|`model`            |Generate Model|
+|`service`            |Generate Service|
+|`controller`             |Generate Controller|
+|`msc`           |Generate Model, Service & Controller|
+|`app_start`        |Generate app_start/{name}Config.js|
 
 
-(Coming Soon)
+
+
+(More Documentation Coming Soon)
+
+
 
 ## Todo
 - [ ] Move /views to /app/views
-- [ ] Use plop for generating files
+- [x] Use plop for generating files
 - [ ] Enhance User functionalities (reset/change password, upload avatar)
+- [ ] Add Unit of Work and Repository Layer
