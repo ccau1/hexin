@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
 
 const bCrypt = require('bcrypt');
-const {generateToken} = require('hexin-core/helpers/Token');
+// const {generateToken} = require('hexin-core/helpers/Token');
 
 const UserSchema = new Schema({
   roles: [String],
@@ -21,10 +21,10 @@ const UserSchema = new Schema({
 UserSchema.pre('save', function (callback) {
   let currentUser = this;
 
-  if (this.isNew) {
-    currentUser.reset_token.token = generateToken();
-    currentUser.reset_token.expired_at = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-  }
+  // if (this.isNew) {
+  //   currentUser.reset_token.token = generateToken();
+  //   currentUser.reset_token.expired_at = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  // }
 
   // Break out if the password hasn't changed
   if (!currentUser.isModified('password')) {
