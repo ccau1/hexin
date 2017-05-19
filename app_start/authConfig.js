@@ -24,13 +24,14 @@ module.exports = class AuthConfig extends AppStartConfig {
     const {router} = appConfig;
 
     router.use((req, res, next) => {
-      let has = false;
+      console.log('auth middleware');
       if (req.headers.authorization) {
         let parts = req.headers.authorization.split(' ');
+        console.log('wha');
         if (/^Bearer$/i.test(parts[0])) {
           try {
+            console.log('baba');
             const token = jwt.decode(parts[1], appConfig.secret);
-            has = true;
 
             User.findOne({_id: token.sub}, (errors, user) => {
               if (user) {
@@ -39,12 +40,12 @@ module.exports = class AuthConfig extends AppStartConfig {
               next();
             });
           } catch (e) {
+            console.log('auth middleware next');
             next();
             // return res.status(401).json({message: 'Unauthorized'});
           }
         }
-      }
-      if (!has) {
+      } else {
         next();
       }
       return null;

@@ -23,18 +23,10 @@ module.exports = class AuthController extends ControllerBase {
     * @apiGroup auth
     *
     */
-    router.post('/logout', (req, res, next) => {
-      const {m} = req;
-      const {user} = req._passport.session;
+    router.get('/logout', (req, res, next) => {
+      // TODO:: implement logout logic
 
-      let token = m.generateJwtToken('member', user._id, {expire: moment.utc().unix() + 172800});
-      res.json({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        status: user.status,
-        token: token,
-      });
+      res.json({});
     });
 
     /**
