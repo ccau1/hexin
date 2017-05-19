@@ -28,7 +28,6 @@ module.exports = class AuthConfig extends AppStartConfig {
         let parts = req.headers.authorization.split(' ');
         if (/^Bearer$/i.test(parts[0])) {
           try {
-            console.log('baba');
             const token = jwt.decode(parts[1], appConfig.secret);
 
             User.findOne({_id: token.sub}, (errors, user) => {
