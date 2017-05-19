@@ -4,6 +4,38 @@
     "body": "console.log('$1');$0"
   },
 
+  /* IMPORTS */
+  "Import File": {
+    "prefix": "im",
+    "body": "import ${1} from '${2}${1}';$0"
+  },
+  "Import Local File": {
+    "prefix": "iml",
+    "body": "import ${1} from './${1}';$0"
+  },
+  "Import All": {
+    "prefix": "ima",
+    "body": "import * as ${1} from '${2}${1}';$0"
+  },
+  "Import Some": {
+    "prefix": "ims",
+    "body": "import {$1} from '$2';$0"
+  },
+  "Import App Components": {
+    "prefix": "imac",
+    "body": "import {$1} from 'app/components';$0"
+  },
+  "Index File": {
+    "prefix": "imi",
+    "body": [
+      "/* @flow */",
+      "import ${1:MyComponent} from './${1:MyComponent}';",
+      "$0",
+      "export default ${1:MyComponent};"
+    ]
+  },
+
+  /* CONTROLLERS */
   "Controller CRUD": {
     "prefix": "ccontroller",
     "body": [
@@ -61,7 +93,7 @@
     ]
   },
 
-
+  /* SERVICES */
   "Service CRUD": {
     "prefix": "cservice",
     "body": [
@@ -100,12 +132,13 @@
   },
 
 
+  /* REQUIRES */
   "Require": {
     "prefix": "rq",
     "body": "const ${1:MyLibrary} = new require('$2${1:MyLibrary}');$0"
   },
   "Require AppFramework": {
     "prefix": "rqaf",
-    "body": "const {${1:AFLibrary}} = new require('${2}AppFramework');$0"
+    "body": "const {${1:AFLibrary}} = new require('Hexin${2}');$0"
   }
 }

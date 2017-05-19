@@ -1,6 +1,6 @@
 {
   "name": "hexin",
-  "description": "hexin",
+  "description": "Hexin Framework",
   "version": "0.1.0",
   "main": "server.js",
   "scripts": {
@@ -9,7 +9,12 @@
     "apidoc": "apidoc -i app/controllers/ -o public/docs/",
     "test": "mocha \"__test__/**/*.js\"",
     "build": "npm run apidoc",
-    "plop": "plop"
+    "plop": "plop",
+    "g:controller": "plop Controller",
+    "g:model": "plop Model",
+    "g:service": "plop Service",
+    "g:msc": "plop MSC",
+    "g:app_start": "plop App_Start"
   },
   "repository": {
     "type": "git",
