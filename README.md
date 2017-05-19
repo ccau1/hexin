@@ -80,11 +80,14 @@ The controller will have two base class to extend from; the ControllerBase and C
 
 #### Constructor
 `constructor(app: Object)` - controller is instantiated with an app argument
+
 `super(app: Object[, controllerName: string[, service: Object]])` - ControllerBase super
+
 `super(app: Object[, controllerName: string[, service: Object[, middlewares]]])` - ControllerCrudBase super
 
 #### Extendable class
 `ControllerBase` - documentation in https://github.com/ccau1/hexin-core#controllerbase
+
 `ControllerCrudBase` - documentation in https://github.com/ccau1/hexin-core#controllercrudbase
 
 ControllerCrudBase automatically initalizes the following routes:
@@ -107,6 +110,7 @@ router.post('/', this.authorize(), (req, res, next) { // (same as above)
 router.post('/', this.authorize('user', 'admin'), (req, res, next) {
 ```
 `renderRoutes(router: Object): void` - this is the method where you declare all the routes for this controller. You must override this method in each controller
+
 `this.isVerb(verb: string, inVerbList: Array<string>|string): boolean` - Function that returns true if first arg is in second argument. Useful for checking if req.method is equal to one of the verbs listed
 ```javascript
 this.isVerb(req.method, 'PUT|POST|DELETE')
@@ -168,10 +172,12 @@ The service will have two base class to extend from; the ServiceBase and Service
 
 #### Constructor
 `constructor(context: Object)` - services will be instantiated with a context argument (represents router's request object)
+
 `super(context: Object, model: Object)`
 
 #### Extendable Class
 `ServiceBase` - documentation in https://github.com/ccau1/hexin-core#servicebase
+
 `ServiceCrudBase` - documentation in https://github.com/ccau1/hexin-core#servicecrudbase
 
 ServiceCrudBase automatically provides the following methods:
@@ -184,14 +190,20 @@ ServiceCrudBase automatically provides the following methods:
 
 #### Context Variables (this)
 `t(localeKey: string, args: Array<string>): string` - translates localeKey into text defined in current locale
+
 `lang` - current locale
+
 `context` - context passed from parent
+
 `_model` - the model passed from constructor
 
 #### Helper Methods
 `validate(obj: Object): boolean` - validates model object and returns true if success or throws error if fails. Used before passing it to the database
+
 `sanitize` - modify object to become database ready. Used before passing it to the database
+
 `mapper` - a DTO mapper to handle from database to client
+
 `mapperReverse` - a DTO mapper to handle from client to database
 
 
@@ -238,7 +250,7 @@ module.exports = class TodoService extends ServiceCrudBase {
 
 ## App_Start
 The app_start folder contains all the configuration files needed to get the app started. Each of the config files will have three lifecycle methods available for it: `preInit()`, `init()`, `postInit()`
-```
+```javascript
 'use strict';
 
 const {AppStartConfig} = require('hexin-core');
@@ -278,6 +290,7 @@ $ plop {scriptName}
 
 ## Useful Requires and Helpers
 `const configs = require('../../configs').base;` - Project configs
+
 `const {HandleError} = require('hexin-core/helpers');` - Error handling
 
 (More Documentation Coming Soon)
