@@ -1,8 +1,8 @@
 {
 	"apps": [
 		{
-			"name": "wttwe-api",
-			"cwd" : "/home/deploy/wttwe/wttwe-api",
+			"name": "hexin-api",
+			"cwd" : "/home/deploy/hexin/hexin-api",
 			"script": "server.js",
 			"instances": 1,
 			"exec_mode": "fork",

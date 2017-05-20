@@ -5,7 +5,7 @@ const expect = chai.expect;
 
 const configs = require('../configs');
 
-describe('Test configs', function () {
+describe('Config', function () {
   it('config file name ', function* () {
     configs.init(process.env.NODE_ENV);
 

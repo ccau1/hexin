@@ -5,8 +5,8 @@ const expect = chai.expect;
 
 const configs = require('../../configs');
 
-describe('Test configs 2', function () {
-  it('config file name 23', function* () {
+describe('Service:Auth', function () {
+  it('test auth 1', function* () {
     configs.init(process.env.NODE_ENV);
 
     expect(configs.base).to.not.be.undefined;
