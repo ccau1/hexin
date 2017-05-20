@@ -1,13 +1,13 @@
 {
 	"apps": [
 		{
-			"name": "wttwe-api",
-			"cwd" : "/home/deploy/wttwe/wttwe-api",
+			"name": "hexin-api",
+			"cwd" : "/root/hexin/hexin-api",
 			"script": "server.js",
 			"instances": 1,
 			"exec_mode": "fork",
 			"env": {
-				"NODE_ENV": "staging",
+				"NODE_ENV": "development",
 				"PORT": "8281"
 			}
 		}

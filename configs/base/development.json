@@ -1,34 +1,25 @@
 {
+	"title": "HEXIN APP",
+	"baseUrl": "/api",
+	"port": 8280,
 	"debug": true,
-	"aws": {
-		"iam": {
-			"s3": "s3-user-devcdn.tr",
-			"ses": "ses-user-tr"
-		}
-	},
-	"beanstalkd": {
-		"host": "beanstalkd",
-		"port": 11300
-	},
-	"redis" : {
-		"host": "rds",
-		"port": 6379,
-		"ttl": 6000
-	},
-	"payment": {
-		"braintree": {
-			"sandbox": true
+  "secret": "1232412421412",
+  "host": "http://localhost",
+	"mail": {
+		"service": "gmail",
+		"auth": {
+				"user": "gmail.user@gmail.com",
+				"pass": "yourpass"
 		}
 	},
 	"db": {
-		"mongo-wttwe-db": {
+		"main-db": {
 			"engine": "mongo",
 			"connection": {
 				"hosts": ["localhost:27017"],
-				"database": "wttwe"
-			}
+				"database": "hexin"
+			},
+			"default": true
     }
-	},
-  "secret": "1232412421412",
-  "host": "http://localhost"
+	}
 }

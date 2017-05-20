@@ -16,7 +16,7 @@ $ npm start
 ### NPM Scripts
 |`npm run <script>`    |Description|
 |-------------------|-----------|
-|`start`            |Serves your app at `localhost:3000`|
+|`start`            |Serves your app at `localhost:8280` (port by default)|
 |`build`            |Builds the application|
 |`test`             |Test the application using mocha|
 |`apidoc`           |Build apidoc page to public/docs/|
@@ -54,6 +54,8 @@ Table of contents
 |   └── controllers             Handles routes
 |   └── helpers                 Reusable helper methods
 |   └── models                  Mongoose models
+|   └── repos                   Data access layers (coming soon)
+|       └── unitOfWork.js       Contains all repos
 |   └── services                Business logic (fascades between controller and models)
 ├── app_start                   Holds application startup code
 |   └── index.js                Handles ordering & calling of the application startup code
