@@ -12,13 +12,21 @@
 				"pass": "yourpass"
 		}
 	},
+	"redis": {
+		"host": "",
+		"port": ""
+	},
+	"fivebeans": {
+		"host": "",
+		"port": ""
+	},
 	"db": {
 		"main-db": {
 			"engine": "mongo",
 			"connection": {
 				"hosts": ["primary:27017", "secondary1:27017", "secondary2:27017"],
-				"database": "wttwe",
-				"replicaSet": "wttwe-replicaset"
+				"database": "hexin",
+				"replicaSet": "hexin-replicaset"
 			},
 			"default": true
     }

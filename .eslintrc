@@ -6,9 +6,14 @@
   "rules": {
     // disable rules from base configurations
     "indent": ["error", 2],
-    "comma-dangle": ["error", "always-multiline"],     // disallow trailing commas in object literals
+    "comma-dangle": ["error"],     // disallow trailing commas in object literals
     "no-new-require": "off",
     "operator-assignment": "off",
     "linebreak-style": "off"
+  },
+  "globals": {
+    "HttpResponseError": true,
+    "ValidationError": true,
+    "HttpStatusCode": true
   }
 }

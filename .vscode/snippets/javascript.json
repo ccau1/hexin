@@ -137,8 +137,8 @@
     "prefix": "rq",
     "body": "const ${1:MyLibrary} = new require('$2${1:MyLibrary}');$0"
   },
-  "Require AppFramework": {
-    "prefix": "rqaf",
+  "Require Hexin": {
+    "prefix": "rqhx",
     "body": "const {${1:AFLibrary}} = new require('Hexin${2}');$0"
   }
 }

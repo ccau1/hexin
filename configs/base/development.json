@@ -12,6 +12,14 @@
 				"pass": "yourpass"
 		}
 	},
+	"redis": {
+		"host": "",
+		"port": ""
+	},
+	"fivebeans": {
+		"host": "",
+		"port": ""
+	},
 	"db": {
 		"main-db": {
 			"engine": "mongo",
