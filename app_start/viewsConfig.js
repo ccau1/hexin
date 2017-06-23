@@ -19,9 +19,9 @@ module.exports = class ViewsConfig extends AppStartConfig {
         layoutsDir: __dirname + '/../views/layouts',
         // Specify helpers which are only registered on this instance.
         helpers: {
-          title: title,
-        },
-      },
+          title: title
+        }
+      }
     };
 
     app.set('views', views.dir); // TODO:: not working, still defaulting to /views

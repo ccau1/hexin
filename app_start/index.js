@@ -2,23 +2,26 @@
 
 const {AppStartBase} = require('hexin-core');
 
-const Auth = require('./authConfig');
-const BodyParser = require('./bodyParserConfig');
-const Controllers = require('./controllersConfig');
-const Db = require('./dbConfig');
-const Errors = require('./errorsConfig');
-const HttpHeaders = require('./httpHeadersConfig');
-const Indicatives = require('./indicativesConfig');
-const Locale = require('./localeConfig');
-const Logger = require('./loggerConfig');
-const PublicPath = require('./publicPathConfig');
-const Router = require('./routerConfig');
-const ServerStart = require('./serverStartConfig');
-const Views = require('./viewsConfig');
+const {
+  BodyParserConfig: BodyParser,
+  DbConfig: Db,
+  LoggerConfig: Logger,
+  ErrorsConfig: Errors,
+  ServerStartConfig: ServerStart,
+  RouterConfig: Router
+} = require('hexin-core/app_start');
 
 // const {FiveBeans} = require('hexin-core/app_start');
 // const Mailer = require('hexin-core/app_start/configs/MailerConfig');
-// const {Redis} = require('hexin-core/app_start');
+// const Redis = require('hexin-core/app_start/configs/RedisConfig');
+
+const Auth = require('./authConfig');
+const Controllers = require('./controllersConfig');
+const HttpHeaders = require('./httpHeadersConfig');
+const Indicatives = require('./indicativesConfig');
+const Locale = require('./localeConfig');
+const PublicPath = require('./publicPathConfig');
+const Views = require('./viewsConfig');
 
 module.exports = class AppStart extends AppStartBase {
 

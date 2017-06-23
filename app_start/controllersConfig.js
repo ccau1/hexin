@@ -32,7 +32,7 @@ module.exports = class ControllersConfig extends AppStartConfig {
             name: file.replace(/\.[^/.]+$/, ''),
             file: file,
             path: dir,
-            fullPath: fileFullPath,
+            fullPath: fileFullPath
           })
         );
       }

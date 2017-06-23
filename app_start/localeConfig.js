@@ -12,8 +12,8 @@ module.exports = class LocaleConfig extends AppStartConfig {
       accept: {
         zh_HK: ['zh_HK'],
         zh_CN: ['zh_CN'],
-        en: ['en-us', 'en-au', 'en-bz', 'en-zw', 'en-gb', 'en-tt', 'en-za', 'en-ph', 'en-nz', 'en-jm', 'en-ie', 'en-ca'],
-      },
+        en: ['en-us', 'en-au', 'en-bz', 'en-zw', 'en-gb', 'en-tt', 'en-za', 'en-ph', 'en-nz', 'en-jm', 'en-ie', 'en-ca']
+      }
     };
   }
 

@@ -23,7 +23,7 @@ module.exports = class AuthController extends ControllerBase {
     * @apiGroup auth
     *
     */
-    router.get('/logout', (req, res, next) => {
+    router.get('/logout', function* (req, res, next) {
       // TODO:: implement logout logic
 
       res.json({});
@@ -53,7 +53,7 @@ module.exports = class AuthController extends ControllerBase {
         name: user.name,
         email: user.email,
         status: user.status,
-        token: token,
+        token: token
       });
     });
 
@@ -74,16 +74,11 @@ module.exports = class AuthController extends ControllerBase {
     * @apiSuccess {String} password Password
     * @apiSuccess {String} confirmpassword Confirm Password
     */
-    router.post('/register', (req, res, next) => {
-      co(function* () {
-        const {m} = req;
-        const result = yield m.createUser(req.body);
+    router.post('/register', function* (req, res, next) {
+      const {m} = req;
+      const result = yield m.createUser(req.body);
 
-        res.send(result);
-      })
-      .catch(error => {
-        next(error);
-      });
+      res.send(result);
     });
 
     /**
@@ -94,19 +89,14 @@ module.exports = class AuthController extends ControllerBase {
     *
     * @apiSuccess {Object} user User
     */
-    router.get('/user', authorize(), (req, res, next) => {
-      co(function* () {
-        const {current_user} = req;
-        res.send({
-          _id: current_user._id,
-          firstName: current_user.firstName,
-          lastName: current_user.lastName,
-          email: current_user.email,
-          roles: current_user.roles,
-        });
-      })
-      .catch(error => {
-        next(error);
+    router.get('/user', authorize(), function* (req, res, next) {
+      const {current_user} = req;
+      res.send({
+        _id: current_user._id,
+        firstName: current_user.firstName,
+        lastName: current_user.lastName,
+        email: current_user.email,
+        roles: current_user.roles
       });
     });
 
@@ -119,15 +109,10 @@ module.exports = class AuthController extends ControllerBase {
     *
     * @apiSuccess {String} reset_token  Token to call reset_password
     */
-    router.post('/forgot-password', authorize(), (req, res, next) => {
-      co(function* () {
-        const {m} = req;
-        const result = yield m.forgotPassword(req.body.email);
-        res.send(result);
-      })
-      .catch(error => {
-        next(error);
-      });
+    router.post('/forgot-password', authorize(), function* (req, res, next) {
+      const {m} = req;
+      const result = yield m.forgotPassword(req.body.email);
+      res.send(result);
     });
 
     /**
@@ -138,15 +123,10 @@ module.exports = class AuthController extends ControllerBase {
     * @apiParam {String} reset_token Reset token provided to user from email
     *
     */
-    router.post('/reset-password', authorize(), (req, res, next) => {
-      co(function* () {
-        const {m} = req;
-        const result = yield m.resetPassword(req.body.reset_token);
-        res.status(204).send(result);
-      })
-      .catch(error => {
-        next(error);
-      });
+    router.post('/reset-password', authorize(), function* (req, res, next) {
+      const {m} = req;
+      const result = yield m.resetPassword(req.body.reset_token);
+      res.status(204).send(result);
     });
   }
 };
