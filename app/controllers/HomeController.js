@@ -9,17 +9,17 @@ module.exports = class HomeController extends ControllerBase {
   }
 
   renderRoutes(router) {
-    router.get('/', function* (req, res) {
+    router.get('/', async (req, res) => {
       res.render(
         'index',
         {});
     });
 
-    router.get('/health', function* (req, res) {
+    router.get('/health', async (req, res) => {
       res.end('health check okay');
     });
 
-    router.get('/docs', function* (req, res) {
+    router.get('/docs', async (req, res) => {
       fs.readFile(__dirname + '/../../doc/index.html', 'utf8', function (err, text) {
         res.send(text);
       });

@@ -1,7 +1,5 @@
 'use strict';
 
-const co = require('co');
-
 const passport = require('passport');
 const moment = require('moment');
 const {ControllerBase} = require('hexin-core');
@@ -23,7 +21,7 @@ module.exports = class AuthController extends ControllerBase {
     * @apiGroup auth
     *
     */
-    router.get('/logout', function* (req, res, next) {
+    router.get('/logout', async (req, res, next) => {
       // TODO:: implement logout logic
 
       res.json({});
@@ -74,9 +72,9 @@ module.exports = class AuthController extends ControllerBase {
     * @apiSuccess {String} password Password
     * @apiSuccess {String} confirmpassword Confirm Password
     */
-    router.post('/register', function* (req, res, next) {
+    router.post('/register', async (req, res, next) => {
       const {m} = req;
-      const result = yield m.createUser(req.body);
+      const result = await m.createUser(req.body);
 
       res.send(result);
     });
@@ -89,7 +87,7 @@ module.exports = class AuthController extends ControllerBase {
     *
     * @apiSuccess {Object} user User
     */
-    router.get('/user', authorize(), function* (req, res, next) {
+    router.get('/user', authorize(), async (req, res, next) => {
       const {current_user} = req;
       res.send({
         _id: current_user._id,
@@ -109,9 +107,9 @@ module.exports = class AuthController extends ControllerBase {
     *
     * @apiSuccess {String} reset_token  Token to call reset_password
     */
-    router.post('/forgot-password', authorize(), function* (req, res, next) {
+    router.post('/forgot-password', authorize(), async (req, res, next) => {
       const {m} = req;
-      const result = yield m.forgotPassword(req.body.email);
+      const result = await m.forgotPassword(req.body.email);
       res.send(result);
     });
 
@@ -123,9 +121,9 @@ module.exports = class AuthController extends ControllerBase {
     * @apiParam {String} reset_token Reset token provided to user from email
     *
     */
-    router.post('/reset-password', authorize(), function* (req, res, next) {
+    router.post('/reset-password', authorize(), async (req, res, next) => {
       const {m} = req;
-      const result = yield m.resetPassword(req.body.reset_token);
+      const result = await m.resetPassword(req.body.reset_token);
       res.status(204).send(result);
     });
   }

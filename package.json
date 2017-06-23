@@ -30,7 +30,7 @@
     "app-module-path": "^2.2.0",
     "async": "^2.4.1",
     "aws-sdk": "^2.75.0",
-    "bcrypt": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3",
     "braintree": "^2.0.2",
     "co": "^4.6.0",
     "connect-multiparty": "^2.0.0",

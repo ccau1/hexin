@@ -5,7 +5,7 @@ const mongoose = require('hexin-core/helpers/Database').getConnection();
 const Schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
 
-const bCrypt = require('bcrypt');
+const bCrypt = require('bcrypt-nodejs');
 // const {generateToken} = require('hexin-core/helpers/Token');
 
 const UserSchema = new Schema({
@@ -14,7 +14,7 @@ const UserSchema = new Schema({
   lastName: {type: String, required: true},
   email: {type: String, unique: true, required: true},
   password: {type: String, minLength: 8, required: true},
-  contractGroupId: [{type: SchemaTypes.ObjectId, required: true, ref: 'ContractGroup'}],
+  contractGroupId: [{type: SchemaTypes.ObjectId, required: true, ref: 'ContractGroup'}]
 }, {collection: 'users'});
 
 // Execute before each user.save() call

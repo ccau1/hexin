@@ -27,10 +27,10 @@ module.exports = class AuthService extends ServiceBase {
     return token;
   }
 
-  * createUser(registerObj) {
+  async createUser(registerObj) {
     const {t} = this;
 
-    let user = yield User.findOne({email: registerObj.email}).exec();
+    let user = await User.findOne({email: registerObj.email}).exec();
     if (user) {
       throw new ValidationError(t('err_member_info_exist', [t('display_email_or_username')]));
     } else {
@@ -40,13 +40,13 @@ module.exports = class AuthService extends ServiceBase {
         email: registerObj.email,
         password: registerObj.password
       });
-      return yield newUser.save();
+      return await newUser.save();
     }
   }
 
-  * forgotPassword(email) {
+  async forgotPassword(email) {
     const {t} = this;
-    let user = yield User.findOne({email: email}).exec();
+    let user = await User.findOne({email: email}).exec();
     if (!user) {
       throw new ValidationError(t('err_not_exist', [t('display_email_or_username')]));
     } else {
@@ -54,16 +54,16 @@ module.exports = class AuthService extends ServiceBase {
     }
   }
 
-  * resetPassword(reset_token) {
+  async resetPassword(reset_token) {
     const {t} = this;
-    let user = yield User.findOne({'reset_token.token': reset_token});
+    let user = await User.findOne({'reset_token.token': reset_token});
     if (!user) {
       throw new ValidationError(t('err_reset_token_expired'));
     }
     return user;
   }
 
-  * validate(obj) {
+  async validate(obj) {
     const {t} = this;
     const rule = {
       firstName: 'required',
@@ -79,6 +79,6 @@ module.exports = class AuthService extends ServiceBase {
       same: t('err_member_password_not_match')
     };
 
-    return yield indicative.validateAll(obj, rule, message);
+    return await indicative.validateAll(obj, rule, message);
   }
 };
