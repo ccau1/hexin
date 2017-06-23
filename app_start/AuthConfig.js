@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const jwt = require('jwt-simple');
 const co = require('co');
-const {AppStartConfig, HandleError} = require('hexin-core');
+const {AppStartConfig} = require('hexin-core');
 
 module.exports = class AuthConfig extends AppStartConfig {
   preInit(appConfig) {
@@ -51,19 +51,19 @@ module.exports = class AuthConfig extends AppStartConfig {
     passport.use('local', new LocalStrategy({
       usernameField: 'username',
       passwordField: 'password',
-      passReqToCallback: true,
+      passReqToCallback: true
     }, (req, username, password, callback) => {
       const {t} = req.locale;
 
       co(function* () {
         const user = yield User.findOne({$or: [{name: username}, {email: username}]}).exec();
         if (!user) {
-          throw new HandleError({_error: [t('err_find_no_result', ['users'])]}, 400);
+          throw new ValidationError(t('err_find_no_result', ['users']));
         }
         if (yield user.verifyPassword(password)) {
           callback(null, user, 'Login successfully.');
         } else {
-          throw new HandleError({_error: [t('err_member_password_invalid')]}, 400);
+          throw new ValidationError(t('err_member_password_invalid'));
         }
       })
       .catch(errors => {

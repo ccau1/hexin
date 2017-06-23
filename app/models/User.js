@@ -14,7 +14,7 @@ const UserSchema = new Schema({
   lastName: {type: String, required: true},
   email: {type: String, unique: true, required: true},
   password: {type: String, minLength: 8, required: true},
-  contractGroupId: [{type: SchemaTypes.ObjectId, required: true, ref: 'ContractGroup'}]
+  contractGroupId: [{type: SchemaTypes.ObjectId, required: true, ref: 'ContractGroup'}],
 }, {collection: 'users'});
 
 // Execute before each user.save() call
@@ -37,7 +37,7 @@ UserSchema.pre('save', function (callback) {
       return callback(saltErrors);
     }
 
-    return bCrypt.hash(currentUser.password, salt, function (hashErrors, hash) {
+    return bCrypt.hash(currentUser.password, salt, null, function (hashErrors, hash) {
       if (hashErrors) {
         return callback(hashErrors);
       }
