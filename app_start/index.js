@@ -15,13 +15,13 @@ const {
 // const Mailer = require('hexin-core/app_start/configs/MailerConfig');
 // const Redis = require('hexin-core/app_start/configs/RedisConfig');
 
-const Auth = require('./authConfig');
-const Controllers = require('./controllersConfig');
-const HttpHeaders = require('./httpHeadersConfig');
-const Indicatives = require('./indicativesConfig');
-const Locale = require('./localeConfig');
-const PublicPath = require('./publicPathConfig');
-const Views = require('./viewsConfig');
+const Auth = require('./AuthConfig');
+const Controllers = require('./ControllersConfig');
+const HttpHeaders = require('./HttpHeadersConfig');
+const Indicatives = require('./IndicativesConfig');
+const Locale = require('./LocaleConfig');
+const PublicPath = require('./PublicPathConfig');
+const Views = require('./ViewsConfig');
 
 module.exports = class AppStart extends AppStartBase {
 
