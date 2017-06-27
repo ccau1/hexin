@@ -7,14 +7,44 @@ const _ = require('lodash');
 const jwt = require('jwt-simple');
 const moment = require('moment');
 const configs = require('../../configs').base;
+const bCrypt = require('bcrypt-nodejs');
+const MongoGenericRepository = require('hexin-core/repos/MongoGenericRepository');
 
 // Models
-const User = new require('../models/User');
+const unitOfWork = new require('../repos/unitOfWork');
 
 
 module.exports = class AuthService extends ServiceBase {
   constructor(context_) {
-    super(context_, User);
+    super(context_, unitOfWork.userRepository);
+  }
+
+  async verifyPassword(user, password) {
+    return await new Promise((resolve, reject) => {
+      bCrypt.compare(password, user.password, (error, result) => {
+        console.log('bc comp', error, result);
+        if (error) {
+          reject(error);
+        }
+        resolve(result);
+      });
+    });
+  }
+
+  async getHash(password) {
+    return await new Promise((resolve, reject) => {
+      bCrypt.genSalt(10, (saltErrors, salt) => {
+        if (saltErrors) {
+          throw new Error(saltErrors);
+        }
+        bCrypt.hash(password, salt, null, (hashErrors, hash) => {
+          if (hashErrors) {
+            throw new Error(saltErrors);
+          }
+          resolve(hash);
+        });
+      });
+    });
   }
 
   generateJwtToken(type, _id, opts) {
@@ -28,25 +58,30 @@ module.exports = class AuthService extends ServiceBase {
   }
 
   async createUser(registerObj) {
-    const {t} = this;
+    const {t, _repo} = this;
 
-    let user = await User.findOne({email: registerObj.email}).exec();
+    let user = await _repo.findOne({email: registerObj.email});
     if (user) {
       throw new ValidationError(t('err_member_info_exist', [t('display_email_or_username')]));
     } else {
-      const newUser = new User({
+      const hashedPassword = await this.getHash(registerObj.password);
+      let newUser = {
         firstName: registerObj.firstName,
         lastName: registerObj.lastName,
         email: registerObj.email,
-        password: registerObj.password
-      });
-      return await newUser.save();
+        username: registerObj.email,
+        password: hashedPassword,
+        roles: _repo instanceof MongoGenericRepository ? ['user'] : 'user'
+      };
+      const savedUser = await _repo.create(newUser);
+      _repo.commit();
+      return savedUser;
     }
   }
 
   async forgotPassword(email) {
-    const {t} = this;
-    let user = await User.findOne({email: email}).exec();
+    const {t, _repo} = this;
+    let user = await _repo.findOne({email: email});
     if (!user) {
       throw new ValidationError(t('err_not_exist', [t('display_email_or_username')]));
     } else {
@@ -55,8 +90,8 @@ module.exports = class AuthService extends ServiceBase {
   }
 
   async resetPassword(reset_token) {
-    const {t} = this;
-    let user = await User.findOne({'reset_token.token': reset_token});
+    const {t, _repo} = this;
+    let user = await _repo.findOne({'reset_token.token': reset_token});
     if (!user) {
       throw new ValidationError(t('err_reset_token_expired'));
     }

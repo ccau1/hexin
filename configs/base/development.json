@@ -28,6 +28,25 @@
 				"database": "hexin"
 			},
 			"default": true
+    },
+		"mysql-db": {
+			"engine": "sequelize",
+			"connection": {
+				"user": "root",
+				"pass": "root",
+				"database": "hexin",
+				"configs": {
+					"host": "localhost",
+					"port": "8889",
+					"dialect": "mysql",
+
+					"pool": {
+						"max": 5,
+						"min": 0,
+						"idle": 10000
+					}
+				}
+			}
     }
 	}
 }

@@ -3,7 +3,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const jwt = require('jwt-simple');
-const co = require('co');
 const {AppStartConfig} = require('hexin-core');
 
 module.exports = class AuthConfig extends AppStartConfig {
@@ -19,26 +18,25 @@ module.exports = class AuthConfig extends AppStartConfig {
     });
   }
   init() {
-    const User = new require('../app/models/User');
+    const {userRepository: User} = new require('../app/repos/unitOfWork');
+    const AuthService = require('../app/services/AuthService');
     const {appConfig} = this;
     const {router} = appConfig;
 
-    router.use((req, res, next) => {
+    router.use(async (req, res, next) => {
       if (req.headers.authorization) {
         let parts = req.headers.authorization.split(' ');
         if (/^Bearer$/i.test(parts[0])) {
+          const token = jwt.decode(parts[1], appConfig.secret);
+          let user = null;
           try {
-            const token = jwt.decode(parts[1], appConfig.secret);
-
-            User.findOne({_id: token.sub}, (errors, user) => {
-              if (user) {
-                req.current_user = user;
-              }
-              next();
-            });
-          } catch (e) {
+            user = await User.findOne({_id: token.sub});
+            if (user) {
+              req.current_user = user;
+            }
             next();
-            // return res.status(401).json({message: 'Unauthorized'});
+          } catch (err) {
+            next();
           }
         }
       } else {
@@ -52,23 +50,27 @@ module.exports = class AuthConfig extends AppStartConfig {
       usernameField: 'username',
       passwordField: 'password',
       passReqToCallback: true
-    }, (req, username, password, callback) => {
+    }, async (req, username, password, callback) => {
       const {t} = req.locale;
+      const authService = new AuthService(req);
 
-      co(function* () {
-        const user = yield User.findOne({$or: [{name: username}, {email: username}]}).exec();
-        if (!user) {
-          throw new ValidationError(t('err_find_no_result', ['users']));
-        }
-        if (yield user.verifyPassword(password)) {
-          callback(null, user, 'Login successfully.');
-        } else {
-          throw new ValidationError(t('err_member_password_invalid'));
-        }
-      })
-      .catch(errors => {
-        return callback(errors, false, errors);
-      });
+      // co(async () => {
+      console.log('abc', username);
+      const user = await User.findOne({$or: [{username: username}, {email: username}]});
+      console.log('user', user);
+      // console.log('auth', password, await authService.verifyPassword(user, password));
+      if (!user) {
+        throw new ValidationError(t('err_find_no_result', ['users']));
+      }
+      if (await authService.verifyPassword(user, password)) {
+        callback(null, user, 'Login successfully.');
+      } else {
+        throw new ValidationError(t('err_member_password_invalid'));
+      }
+      // })
+      // .catch(errors => {
+      //   return callback(errors, false, errors);
+      // });
     }));
   }
 };
