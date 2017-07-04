@@ -8,7 +8,7 @@ module.exports.__global__ = {};
 
 module.exports.init = function (env) {
   const baseSettings = {
-    NODE_ENV: env || this.env,
+    NODE_ENV: env || this.env
   };
 
   // if base is already set, don't fetch again

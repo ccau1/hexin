@@ -5,7 +5,7 @@ const {AppStartConfig} = require('hexin-core');
 const expressHbs = require('express-handlebars');
 
 module.exports = class ViewsConfig extends AppStartConfig {
-  init() {
+  init(next) {
     const {app, title} = this.appConfig;
 
     //    set views settings
@@ -38,5 +38,7 @@ module.exports = class ViewsConfig extends AppStartConfig {
 
       break;
     }
+
+    next();
   }
 };

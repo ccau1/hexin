@@ -5,7 +5,7 @@ const {AppStartConfig} = require('hexin-core');
 const {Locale} = require('hexin-core/helpers');
 
 module.exports = class LocaleConfig extends AppStartConfig {
-  preInit(appConfig) {
+  preInit(next, appConfig) {
     appConfig.localeSettings = {
       default: 'en',
       path: path.dirname(require.main.filename) + '/locales',
@@ -15,11 +15,13 @@ module.exports = class LocaleConfig extends AppStartConfig {
         en: ['en-us', 'en-au', 'en-bz', 'en-zw', 'en-gb', 'en-tt', 'en-za', 'en-ph', 'en-nz', 'en-jm', 'en-ie', 'en-ca']
       }
     };
+    next();
   }
 
-  init() {
+  init(next) {
     const {router} = this.appConfig;
     router.use(this.middleware.bind(this));
+    next();
   }
 
   middleware(req, res, next) {

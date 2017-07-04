@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = class ControllersConfig extends AppStartConfig {
-  init() {
+  init(next) {
     let controllers = [];
     this.handleControllers(path.join(__dirname, '../app/controllers'), controllers)
     .then(cc => {
@@ -13,6 +13,7 @@ module.exports = class ControllersConfig extends AppStartConfig {
       if (controllersWithoutServiceClass.length) {
         console.warn('## following controllers does not have a proper service class:\n', controllersWithoutServiceClass.map(c => c.name));
       }
+      next();
     });
   }
 

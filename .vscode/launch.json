@@ -5,14 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Debug",
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "protocol": "inspector",
+            "preLaunchTask": "nvm",
+            "runtimeExecutable": "${workspaceRoot}/.nvm-node",
             "program": "${workspaceRoot}/server.js",
-            "skipFiles": [
-                "${workspaceRoot}/node_modules/**/*.js",
-                "<node_internals>/**/*.js"
-            ]
+            "env": {
+                "NODE_ENV": "development"
+            }
+            // "skipFiles": [
+            //     "${workspaceRoot}/node_modules/**/*.js",
+            //     "<node_internals>/**/*.js",
+            //     "${workspaceRoot}/app_start"
+            // ]
         }
     ]
 }

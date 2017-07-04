@@ -10,7 +10,7 @@
         "**/.DS_Store": true,
         "**/pm2/**": true,
         "**/node_modules/**": false,
-        "**/.gitignore": true,
+        "**/.gitignore": false,
         "**/.flowconfig": true,
         "**/.eslintrc": false,
         "**/.eslintignore": true,

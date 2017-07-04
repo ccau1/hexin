@@ -21,6 +21,7 @@ const HttpHeaders = require('./HttpHeadersConfig');
 const Indicatives = require('./IndicativesConfig');
 const Locale = require('./LocaleConfig');
 const PublicPath = require('./PublicPathConfig');
+const UnitOfWork = require('./UnitOfWorkConfig');
 const Views = require('./ViewsConfig');
 
 module.exports = class AppStart extends AppStartBase {
@@ -33,12 +34,13 @@ module.exports = class AppStart extends AppStartBase {
     // Note: handlers will be called in the order sorted here
 
     // HANDLE BEGIN :: (Don't remove this line)
-    this.handle(new Db(appConfig));
-    this.handle(new Router(appConfig));
-    this.handle(new HttpHeaders(appConfig));
-    this.handle(new Views(appConfig));
-    this.handle(new PublicPath(appConfig));
-    this.handle(new Logger(appConfig));
+    this.handle(new Db(appConfig));               // set db connections base on appConfig.db
+    this.handle(new HttpHeaders(appConfig));      // set http headers for cross-platform
+    this.handle(new Logger(appConfig));           // set log into file
+    this.handle(new Router(appConfig));           // set base url base on appConfig.baseUrl
+    this.handle(new Views(appConfig));            // set hbs views
+    this.handle(new PublicPath(appConfig));       // set folder for public (assets)
+    this.handle(new UnitOfWork(appConfig));
     // this.handle(new Mailer(appConfig)); // Access from require('hexin-core/Mailer').client
     // this.handle(new FiveBeans(appConfig)); // Access from require('hexin-core/FiveBeans').client
     // this.handle(new Redis(appConfig)); // Access from require('hexin-core/Redis').client
@@ -47,6 +49,7 @@ module.exports = class AppStart extends AppStartBase {
     this.handle(new Locale(appConfig));
     this.handle(new Auth(appConfig));
     this.handle(new Controllers(appConfig));
+
     this.handle(new Errors(appConfig));
     this.handle(new ServerStart(appConfig));
     // HANDLE END :: (Don't remove this line)

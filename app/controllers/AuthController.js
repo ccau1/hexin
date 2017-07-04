@@ -47,7 +47,7 @@ module.exports = class AuthController extends ControllerBase {
 
       let token = m.generateJwtToken('member', user._id, {expire: moment.utc().unix() + 172800});
       res.json({
-        id: user.id,
+        id: user._id,
         name: user.name,
         email: user.email,
         status: user.status,

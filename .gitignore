@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io/api/ansible,git,grunt,jetbrains,node,osx,sublimetext,tortoisegit,visualstudio,visualstudiocode,windows
 
 public/docs
+.nvm-node
 
 ### OSX ###
 *.DS_Store

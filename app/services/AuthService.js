@@ -10,19 +10,15 @@ const configs = require('../../configs').base;
 const bCrypt = require('bcrypt-nodejs');
 const MongoGenericRepository = require('hexin-core/repos/MongoGenericRepository');
 
-// Models
-const unitOfWork = new require('../repos/unitOfWork');
-
-
 module.exports = class AuthService extends ServiceBase {
   constructor(context_) {
-    super(context_, unitOfWork.userRepository);
+    super(context_, context_.unitOfWork.UserRepository);
   }
 
   async verifyPassword(user, password) {
     return await new Promise((resolve, reject) => {
       bCrypt.compare(password, user.password, (error, result) => {
-        console.log('bc comp', error, result);
+        console.log('verifyPassword', error, result);
         if (error) {
           reject(error);
         }
@@ -58,7 +54,7 @@ module.exports = class AuthService extends ServiceBase {
   }
 
   async createUser(registerObj) {
-    const {t, _repo} = this;
+    const {t, _repo, unitOfWork} = this;
 
     let user = await _repo.findOne({email: registerObj.email});
     if (user) {
@@ -74,7 +70,7 @@ module.exports = class AuthService extends ServiceBase {
         roles: _repo instanceof MongoGenericRepository ? ['user'] : 'user'
       };
       const savedUser = await _repo.create(newUser);
-      _repo.commit();
+      await unitOfWork.context.commit();
       return savedUser;
     }
   }
